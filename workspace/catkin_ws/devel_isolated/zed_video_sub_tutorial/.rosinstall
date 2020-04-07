@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/hyeok/workspace/catkin_ws/devel_isolated/zed_video_sub_tutorial/setup.sh

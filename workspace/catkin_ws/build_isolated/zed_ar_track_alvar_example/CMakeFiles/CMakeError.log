@@ -1,0 +1,56 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e33bb/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e33bb.dir/build.make CMakeFiles/cmTC_e33bb.dir/build
+make[1]: Entering directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e33bb.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_e33bb.dir/CheckSymbolExists.c.o   -c /home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_e33bb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e33bb.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e33bb.dir/CheckSymbolExists.c.o  -o cmTC_e33bb 
+CMakeFiles/cmTC_e33bb.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x14): undefined reference to `pthread_create'
+CheckSymbolExists.c:(.text+0x18): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e33bb.dir/build.make:97: recipe for target 'cmTC_e33bb' failed
+make[1]: *** [cmTC_e33bb] Error 1
+make[1]: Leaving directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e33bb/fast' failed
+make: *** [cmTC_e33bb/fast] Error 2
+
+File /home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_07353/fast"
+/usr/bin/make -f CMakeFiles/cmTC_07353.dir/build.make CMakeFiles/cmTC_07353.dir/build
+make[1]: Entering directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_07353.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_07353.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_07353
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07353.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_07353.dir/CheckFunctionExists.c.o  -o cmTC_07353 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_07353.dir/build.make:97: recipe for target 'cmTC_07353' failed
+make[1]: *** [cmTC_07353] Error 1
+make[1]: Leaving directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_ar_track_alvar_example/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_07353/fast' failed
+make: *** [cmTC_07353/fast] Error 2
+
+

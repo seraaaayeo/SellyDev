@@ -1,0 +1,8 @@
+prefix=/home/hyeok/workspace/catkin_ws/install_isolated
+
+Name: carto_mapper
+Description: Description of carto_mapper
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

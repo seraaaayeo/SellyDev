@@ -1,0 +1,56 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_80366/fast"
+/usr/bin/make -f CMakeFiles/cmTC_80366.dir/build.make CMakeFiles/cmTC_80366.dir/build
+make[1]: Entering directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_80366.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_80366.dir/CheckSymbolExists.c.o   -c /home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_80366
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80366.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_80366.dir/CheckSymbolExists.c.o  -o cmTC_80366 
+CMakeFiles/cmTC_80366.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x14): undefined reference to `pthread_create'
+CheckSymbolExists.c:(.text+0x18): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_80366.dir/build.make:97: recipe for target 'cmTC_80366' failed
+make[1]: *** [cmTC_80366] Error 1
+make[1]: Leaving directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_80366/fast' failed
+make: *** [cmTC_80366/fast] Error 2
+
+File /home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2ba3e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2ba3e.dir/build.make CMakeFiles/cmTC_2ba3e.dir/build
+make[1]: Entering directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2ba3e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2ba3e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2ba3e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2ba3e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2ba3e.dir/CheckFunctionExists.c.o  -o cmTC_2ba3e -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_2ba3e.dir/build.make:97: recipe for target 'cmTC_2ba3e' failed
+make[1]: *** [cmTC_2ba3e] Error 1
+make[1]: Leaving directory '/home/hyeok/workspace/catkin_ws/build_isolated/zed_video_sub_tutorial/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_2ba3e/fast' failed
+make: *** [cmTC_2ba3e/fast] Error 2
+
+

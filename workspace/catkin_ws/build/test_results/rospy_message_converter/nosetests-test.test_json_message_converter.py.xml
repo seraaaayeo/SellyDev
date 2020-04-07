@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite name="nosetests" tests="7" errors="6" failures="0" skip="0"><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_json_with_header" time="0.009"><error type="builtins.ModuleNotFoundError" message="No module named 'StringIO'&#10;-------------------- &gt;&gt; begin captured logging &lt;&lt; --------------------&#10;rospy.topics: INFO: topicmanager initialized&#10;--------------------- &gt;&gt; end captured logging &lt;&lt; ---------------------"><![CDATA[  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 65, in test_json_with_header
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+No module named 'StringIO'
+-------------------- >> begin captured logging << --------------------
+rospy.topics: INFO: topicmanager initialized
+--------------------- >> end captured logging << ---------------------]]></error></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_json_with_invalid_message_fields" time="0.001"></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_json_with_string" time="0.006"><error type="builtins.ModuleNotFoundError" message="No module named 'StringIO'"><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 50, in test_json_with_string
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+]]></error></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_ros_message_with_3uint8_array" time="0.002"><error type="builtins.ImportError" message="cannot import name 'Uint8Array3TestMessage'"><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 37, in test_ros_message_with_3uint8_array
+    from rospy_message_converter.msg import Uint8Array3TestMessage
+ImportError: cannot import name 'Uint8Array3TestMessage'
+]]></error></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_ros_message_with_header" time="0.005"><error type="builtins.ModuleNotFoundError" message="No module named 'StringIO'"><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 23, in test_ros_message_with_header
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+]]></error></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_ros_message_with_string" time="0.007"><error type="builtins.ModuleNotFoundError" message="No module named 'StringIO'"><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 12, in test_ros_message_with_string
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+]]></error></testcase><testcase classname="test.test_json_message_converter.TestJsonMessageConverter" name="test_ros_message_with_uint8_array" time="0.001"><error type="builtins.ImportError" message="cannot import name 'Uint8ArrayTestMessage'"><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python3.6/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/usr/lib/python3.6/unittest/case.py", line 605, in run
+    testMethod()
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 28, in test_ros_message_with_uint8_array
+    from rospy_message_converter.msg import Uint8ArrayTestMessage
+ImportError: cannot import name 'Uint8ArrayTestMessage'
+]]></error></testcase></testsuite>
