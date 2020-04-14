@@ -7,6 +7,10 @@
 - docs : https://google-cartographer-ros.readthedocs.io/en/latest/index.html
 - download : https://github.com/cartographer-project/cartographer_ros
 
+## dev options
+- jetson nano
+- ROS melodic, ubuntu 18.04
+
 ### how to run
 - camera sensor
     ```
