@@ -1,0 +1,8 @@
+prefix=/home/hyeok/workspace/catkin_ws/devel_isolated/zed_display_rviz
+
+Name: zed_display_rviz
+Description: Description of zed_display_rviz
+Version: 3.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

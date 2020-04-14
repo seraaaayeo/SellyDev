@@ -1,0 +1,565 @@
+Start testing: Feb 09 15:04 KST
+----------------------------------------------------------
+1/2 Testing: _ctest_rospy_message_converter_nosetests_test.test_json_message_converter.py
+1/2 Test: _ctest_rospy_message_converter_nosetests_test.test_json_message_converter.py
+Command: "/home/hyeok/workspace/catkin_ws/build/catkin_generated/env_cached.sh" "/usr/bin/python3" "/home/hyeok/ros_catkin_ws/install/share/catkin/cmake/test/run_tests.py" "/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_json_message_converter.py.xml" "--return-code" ""/usr/bin/cmake" -E make_directory /home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter" "/usr/bin/nosetests3 -P --process-timeout=60 /home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py --with-xunit --xunit-file=/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_json_message_converter.py.xml"
+Directory: /home/hyeok/workspace/catkin_ws/build/rospy_message_converter
+"_ctest_rospy_message_converter_nosetests_test.test_json_message_converter.py" start time: Feb 09 15:04 KST
+Output:
+----------------------------------------------------------
+E.EEEEE
+======================================================================
+ERROR: test_json_with_header (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 65, in test_json_with_header
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+-------------------- >> begin captured logging << --------------------
+rospy.topics: INFO: topicmanager initialized
+--------------------- >> end captured logging << ---------------------
+
+======================================================================
+ERROR: test_json_with_string (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 50, in test_json_with_string
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_3uint8_array (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 37, in test_ros_message_with_3uint8_array
+    from rospy_message_converter.msg import Uint8Array3TestMessage
+ImportError: cannot import name 'Uint8Array3TestMessage'
+
+======================================================================
+ERROR: test_ros_message_with_header (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 23, in test_ros_message_with_header
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_string (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 12, in test_ros_message_with_string
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 85, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint8_array (test.test_json_message_converter.TestJsonMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py", line 28, in test_ros_message_with_uint8_array
+    from rospy_message_converter.msg import Uint8ArrayTestMessage
+ImportError: cannot import name 'Uint8ArrayTestMessage'
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.062s
+
+FAILED (errors=6)
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter
+  /usr/bin/nosetests3 -P --process-timeout=60 /home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_json_message_converter.py --with-xunit --xunit-file=/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_json_message_converter.py.xml
+-- run_tests.py: verify result "/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_json_message_converter.py.xml"
+<end of output>
+Test time =   6.71 sec
+----------------------------------------------------------
+Test Failed.
+"_ctest_rospy_message_converter_nosetests_test.test_json_message_converter.py" end time: Feb 09 15:04 KST
+"_ctest_rospy_message_converter_nosetests_test.test_json_message_converter.py" time elapsed: 00:00:06
+----------------------------------------------------------
+
+2/2 Testing: _ctest_rospy_message_converter_nosetests_test.test_message_converter.py
+2/2 Test: _ctest_rospy_message_converter_nosetests_test.test_message_converter.py
+Command: "/home/hyeok/workspace/catkin_ws/build/catkin_generated/env_cached.sh" "/usr/bin/python3" "/home/hyeok/ros_catkin_ws/install/share/catkin/cmake/test/run_tests.py" "/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_message_converter.py.xml" "--return-code" ""/usr/bin/cmake" -E make_directory /home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter" "/usr/bin/nosetests3 -P --process-timeout=60 /home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py --with-xunit --xunit-file=/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_message_converter.py.xml"
+Directory: /home/hyeok/workspace/catkin_ws/build/rospy_message_converter
+"_ctest_rospy_message_converter_nosetests_test.test_message_converter.py" start time: Feb 09 15:04 KST
+Output:
+----------------------------------------------------------
+EEEEEEEEEEEEEEEE.EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+======================================================================
+ERROR: test_dictionary_with_array (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 236, in test_dictionary_with_array
+    from rospy_message_converter.msg import TestArray
+ImportError: cannot import name 'TestArray'
+-------------------- >> begin captured logging << --------------------
+rospy.topics: INFO: topicmanager initialized
+--------------------- >> end captured logging << ---------------------
+
+======================================================================
+ERROR: test_dictionary_with_bool (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 248, in test_dictionary_with_bool
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_byte (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 256, in test_dictionary_with_byte
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_char (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 264, in test_dictionary_with_char
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_child_message (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 468, in test_dictionary_with_child_message
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_duration (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 278, in test_dictionary_with_duration
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_empty (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 286, in test_dictionary_with_empty
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_empty_service (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 485, in test_dictionary_with_empty_service
+    expected_req = serialize_deserialize(expected_req)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_float32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 291, in test_dictionary_with_float32
+    expected_message = Float32(data = struct.unpack('<f', '\x7F\x7F\xFF\xFD')[0])
+TypeError: a bytes-like object is required, not 'str'
+
+======================================================================
+ERROR: test_dictionary_with_float64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 299, in test_dictionary_with_float64
+    expected_message = Float64(data = struct.unpack('<d', '\x7F\xEF\xFF\xFF\xFF\xFF\xFF\xFD')[0])
+TypeError: a bytes-like object is required, not 'str'
+
+======================================================================
+ERROR: test_dictionary_with_header (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 320, in test_dictionary_with_header
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_header_with_no_prefix (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 338, in test_dictionary_with_header_with_no_prefix
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_int16 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 362, in test_dictionary_with_int16
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_int32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 378, in test_dictionary_with_int32
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_int64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 394, in test_dictionary_with_int64
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_int8 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 346, in test_dictionary_with_int8
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_setbool_service (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 500, in test_dictionary_with_setbool_service
+    expected_req = serialize_deserialize(expected_req)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_string (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 410, in test_dictionary_with_string
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_time (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 434, in test_dictionary_with_time
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_trigger_service (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 515, in test_dictionary_with_trigger_service
+    expected_req = serialize_deserialize(expected_req)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_uint16 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 370, in test_dictionary_with_uint16
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_uint32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 386, in test_dictionary_with_uint32
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_uint64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 402, in test_dictionary_with_uint64
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_uint8 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 354, in test_dictionary_with_uint8
+    expected_message = serialize_deserialize(expected_message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_dictionary_with_unicode (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 416, in test_dictionary_with_unicode
+    dictionary = { 'data': unicode(expected_message.data) }
+NameError: name 'unicode' is not defined
+
+======================================================================
+ERROR: test_ros_message_with_3uint8_array (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 125, in test_ros_message_with_3uint8_array
+    from rospy_message_converter.msg import Uint8Array3TestMessage
+ImportError: cannot import name 'Uint8Array3TestMessage'
+
+======================================================================
+ERROR: test_ros_message_with_array (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 10, in test_ros_message_with_array
+    from rospy_message_converter.msg import TestArray
+ImportError: cannot import name 'TestArray'
+
+======================================================================
+ERROR: test_ros_message_with_bool (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 23, in test_ros_message_with_bool
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_byte (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 31, in test_ros_message_with_byte
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_char (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 39, in test_ros_message_with_char
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_child_message (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 231, in test_ros_message_with_child_message
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_duration (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 53, in test_ros_message_with_duration
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_empty (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 61, in test_ros_message_with_empty
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_float32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 67, in test_ros_message_with_float32
+    expected_dictionary = { 'data': struct.unpack('<f', '\x7F\x7F\xFF\xFD')[0] }
+TypeError: a bytes-like object is required, not 'str'
+
+======================================================================
+ERROR: test_ros_message_with_float64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 75, in test_ros_message_with_float64
+    expected_dictionary = { 'data': struct.unpack('<d', '\x7F\xEF\xFF\xFF\xFF\xFF\xFF\xFD')[0] }
+TypeError: a bytes-like object is required, not 'str'
+
+======================================================================
+ERROR: test_ros_message_with_header (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 95, in test_ros_message_with_header
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_int16 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 137, in test_ros_message_with_int16
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_int32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 153, in test_ros_message_with_int32
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_int64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 169, in test_ros_message_with_int64
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_int8 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 103, in test_ros_message_with_int8
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_string (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 185, in test_ros_message_with_string
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_time (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 197, in test_ros_message_with_time
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint16 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 145, in test_ros_message_with_uint16
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint32 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 161, in test_ros_message_with_uint32
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint64 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 177, in test_ros_message_with_uint64
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint8 (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 111, in test_ros_message_with_uint8
+    message = serialize_deserialize(message)
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 533, in serialize_deserialize
+    from StringIO import StringIO
+ModuleNotFoundError: No module named 'StringIO'
+
+======================================================================
+ERROR: test_ros_message_with_uint8_array (test.test_message_converter.TestMessageConverter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py", line 116, in test_ros_message_with_uint8_array
+    from rospy_message_converter.msg import Uint8ArrayTestMessage
+ImportError: cannot import name 'Uint8ArrayTestMessage'
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.300s
+
+FAILED (errors=47)
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter
+  /usr/bin/nosetests3 -P --process-timeout=60 /home/hyeok/workspace/catkin_ws/src/rospy_message_converter/test/test_message_converter.py --with-xunit --xunit-file=/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_message_converter.py.xml
+-- run_tests.py: verify result "/home/hyeok/workspace/catkin_ws/build/test_results/rospy_message_converter/nosetests-test.test_message_converter.py.xml"
+<end of output>
+Test time =   6.92 sec
+----------------------------------------------------------
+Test Failed.
+"_ctest_rospy_message_converter_nosetests_test.test_message_converter.py" end time: Feb 09 15:04 KST
+"_ctest_rospy_message_converter_nosetests_test.test_message_converter.py" time elapsed: 00:00:06
+----------------------------------------------------------
+
+End testing: Feb 09 15:04 KST

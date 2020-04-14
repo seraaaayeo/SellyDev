@@ -1,0 +1,8 @@
+prefix=/home/hyeok/workspace/catkin_ws/devel
+
+Name: selly
+Description: Description of selly
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
