@@ -19,9 +19,9 @@
     ```
     - include ydlidar, rviz 
     - rviz topic
-        -odom
-        -Laserscan
-        -map
+        - odom
+        - Laserscan
+        - map
 
 - save map
     ```
