@@ -16,8 +16,8 @@
 ## To-do Project List
 * navigation
 * selly_web or selly_service
-* selly_hardware
+* selly_hardware or selly_motorControl
 
-## Before Presentation
+## To-do Before Presentation
 * Organize all of our project name
-* Write down README each include Dev options, Demo, and How to run
+* Write down README each including Dev options, Demo, and How to run
