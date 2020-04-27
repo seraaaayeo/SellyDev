@@ -3,8 +3,8 @@
 ![vslam](path)
 
 ### openVSLAM : visual SLAM open package
-- docs :
-- paper : 
+- docs : https://openvslam.readthedocs.io/en/master/index.html
+- paper : https://arxiv.org/pdf/1910.01122.pdf
 
 ### dev options
 - dependencies : DBoW2, eigen, g2o, glog, Panglin, SuiteSparse, yaml-cpp
