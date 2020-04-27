@@ -1,4 +1,4 @@
-# visual SLAM : openVSLAM
+# visual SLAM with ZED camera
 
 ![vslam](path)
 
