@@ -1,8 +1,0 @@
-prefix=/home/hyeok/workspace/catkin_ws/install
-
-Name: zed_multicamera_example
-Description: Description of zed_multicamera_example
-Version: 3.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

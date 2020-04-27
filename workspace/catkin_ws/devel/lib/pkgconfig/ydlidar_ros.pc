@@ -1,8 +1,0 @@
-prefix=/home/hyeok/workspace/catkin_ws/devel
-
-Name: ydlidar_ros
-Description: Description of ydlidar_ros
-Version: 1.4.5
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

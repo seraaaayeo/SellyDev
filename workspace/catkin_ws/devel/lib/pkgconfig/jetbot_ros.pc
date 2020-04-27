@@ -1,8 +1,0 @@
-prefix=/home/hyeok/workspace/catkin_ws/devel
-
-Name: jetbot_ros
-Description: Description of jetbot_ros
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
