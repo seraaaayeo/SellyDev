@@ -1,0 +1,5 @@
+classes = 29 
+train = /home/hyeok/darknet/train.txt
+valid = /home/hyeok/darknet/val.txt
+names = /home/hyeok/selly_vision/darknet/data/obj.names
+
