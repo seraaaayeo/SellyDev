@@ -2,7 +2,7 @@
 
 ![ezgif com-optimize (3)](https://user-images.githubusercontent.com/52908154/79710635-97e7a200-8300-11ea-8067-691b4fd930e0.gif)
 
-#### We will use object detection, [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
+#### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
   
 
