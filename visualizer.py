@@ -67,7 +67,7 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, angle, ANGLE_CLASS):
                                 [0, 255, 0], 2)
 
 
-    selly_vision = selly_vision_img(model, img.copy(), point_cloud, max_dist, fix_dist, angle, ANGLE_CLASS)
+    selly_vision, angle = selly_vision_img(model, img.copy(), point_cloud, max_dist, fix_dist, angle, ANGLE_CLASS)
 
     plt.figure(figsize=(20,16))
     plt.subplot(4,3,2)

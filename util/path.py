@@ -24,22 +24,24 @@ def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGL
     center = (240, 270)
 
     for i in moving_object :
-        angle = [ANGLE_DICT[str(i[0][1])+","+str(i[0][0])],  
+        '''angle = [ANGLE_DICT[str(i[0][1])+","+str(i[0][0])],  
             ANGLE_DICT[str(i[1][1])+","+str(i[1][0])], 
             ANGLE_DICT[str(i[0][1])+","+str(i[1][0])],
-            ANGLE_DICT[str(i[1][1])+","+str(i[0][0])]]
-
+            ANGLE_DICT[str(i[1][1])+","+str(i[0][0])]]'''
+        angle = [ANGLE_DICT[str(i[0][1])+","+str(i[1][0])],  
+            ANGLE_DICT[str(i[1][1])+","+str(i[1][0])]]
         min = int(np.min(angle))
         max = int(np.max(angle))   
         temp = [j for j in range(min, max+1)]
         angle_range += temp
 
     for i in fixed_object :
-        angle = [ANGLE_DICT[str(i[0][1])+","+str(i[0][0])],  
+        '''angle = [ANGLE_DICT[str(i[0][1])+","+str(i[0][0])],  
             ANGLE_DICT[str(i[1][1])+","+str(i[1][0])], 
             ANGLE_DICT[str(i[0][1])+","+str(i[1][0])],
-            ANGLE_DICT[str(i[1][1])+","+str(i[0][0])]]
-
+            ANGLE_DICT[str(i[1][1])+","+str(i[0][0])]]'''
+        angle = [ANGLE_DICT[str(i[0][1])+","+str(i[1][0])],  
+            ANGLE_DICT[str(i[1][1])+","+str(i[1][0])]]
         min = int(np.min(angle))
         max = int(np.max(angle))   
         temp = [j for j in range(min, max+1)]
@@ -47,13 +49,16 @@ def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGL
 
     angle_range = set(angle_range)
 
+    return_angle = []
+
     for i in range(ANGLE_CLASS):
         if path_dict_redundant[i+1] < 100 and not i in angle_range:
             x = 100 * math.cos(math.radians((180/ANGLE_CLASS)*i+ (180/ANGLE_CLASS)/2))
             y = 100 * math.sin(math.radians((180/ANGLE_CLASS)*i+ (180/ANGLE_CLASS)/2))
-            cv2.arrowedLine(img, center , (240+int(x),270-int(y)), (0,255,0), 3, tipLength=0.2 )
+            return_angle.append((180/ANGLE_CLASS)*i)
+            cv2.arrowedLine(img, center , (240+int(x),270-int(y)), (0,255,0), 3, tipLength=0.15 )
 
-    return img
+    return img, return_angle
 
 def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS):
     seg_img, only_sidewalk = seg_predict(img,model)
@@ -76,9 +81,9 @@ def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_C
     for i in fixed_object:
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
         
-    selly_vision = selly_vision_path(img.copy(), redundant_obstacle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
+    selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
 
-    return selly_vision
+    return selly_vision, angle
 
 def seg_predict(img, model):
     frame = cv2.resize(img,(480,272))
