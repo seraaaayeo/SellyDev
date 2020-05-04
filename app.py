@@ -3,14 +3,16 @@ from flask import Flask, request, jsonify, send_file
 import numpy as np
 from selly_vision_api import *
 from PIL import Image
+import base64
+import io
 
 app = Flask(__name__)
 
 @app.route('/vision_angle', methods=['POST'])
 def vision_angle():
     if request.method == 'POST':
-        file = request.files['file']
-        img_bytes = file.read()
+        img = request.files['file']
+        img_bytes = img.read()
         result = selly_vision(img_bytes)[1]
     print("send!")
     return str(result)
@@ -21,11 +23,12 @@ def vision_img():
         file = request.files['file']
         img_bytes = file.read()
         result = selly_vision(img_bytes)[0]
-        result = result.tobytes()
-        image = Image.open(result)
+        img = Image.fromarray(result, 'RGB')
+        img_byte_arr = io.BytesIO()
+        img.save(img_byte_arr, format='PNG')
+        encoded_img = base64.encodebytes(img_byte_arr.getvalue()).decode('ascii')
+        data = {}
+        data["key"] = {"result_img": encoded_img}
     print("send!")
-    return send_file(
-                     image,
-                     attachment_filename='result.jpeg',
-                     mimetype='result/jpg'
-               )
+
+    return jsonify(data) 
