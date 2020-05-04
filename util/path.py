@@ -55,7 +55,7 @@ def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGL
         if path_dict_redundant[i+1] < 100 and not i in angle_range:
             x = 100 * math.cos(math.radians((180/ANGLE_CLASS)*i+ (180/ANGLE_CLASS)/2))
             y = 100 * math.sin(math.radians((180/ANGLE_CLASS)*i+ (180/ANGLE_CLASS)/2))
-            return_angle.append((180/ANGLE_CLASS)*i)
+            return_angle.append((180/ANGLE_CLASS)*(i+1))
             cv2.arrowedLine(img, center , (240+int(x),270-int(y)), (0,255,0), 3, tipLength=0.15 )
 
     return img, return_angle

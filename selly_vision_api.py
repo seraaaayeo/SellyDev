@@ -23,7 +23,7 @@ if gpus:
     try:
         tf.config.experimental.set_virtual_device_configuration(
        gpus[0],
-        [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=2000)])
+        [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=500)])
     except RuntimeError as e:
         print(e)
         
@@ -37,5 +37,4 @@ ANGLE = angle_dict(ANGLE_CLASS)
 def selly_vision(img, moving_dist=5, fixed_dist=2.5):
     img = np.frombuffer(img, dtype=np.float32)
     img = np.reshape(img, (2,270,480,3))
-    return selly_vision_img(model, img[0], img[1], moving_dist, fixed_dist, ANGLE, ANGLE_CLASS)[1]
-
+    return selly_vision_img(model, img[0], img[1], moving_dist, fixed_dist, ANGLE, ANGLE_CLASS)
