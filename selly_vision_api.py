@@ -34,14 +34,13 @@ ANGLE_CLASS = 15
 
 ANGLE = angle_dict(ANGLE_CLASS)
 
-def selly_vision(img, moving_dist=5, fixed_dist=2.5):
+def selly_vision(img, point, moving_dist=5, fixed_dist=2.5):
     img = np.frombuffer(img, dtype=np.float32)
-    img = np.reshape(img, (2,270,480,3))
-    return selly_vision_img(model, img[0], img[1], moving_dist, fixed_dist, ANGLE, ANGLE_CLASS)
+    img = np.reshape(img, (270,480,3))
+    point = np.frombuffer(point, dtype=np.float32)
+    point = np.reshape(point, (67,120,3))
+    result = selly_vision_img(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS)
+    return result
 
 def selly_vision_redis(img, point, moving_dist=5, fixed_dist=2.5):
-    img = Image.open(io.BytesIO(img))
-    img = np.array(img, dtype=np.float32)
-    point = Image.open(io.BytesIO(point))
-    point = np.array(point, dtype=np.float32)
     return selly_vision_img(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS)

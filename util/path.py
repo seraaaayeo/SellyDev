@@ -5,7 +5,6 @@ import tensorflow as tf
 from util.angle import *
 from util.depth import *
 from util.object_dection import *
-
 import time 
 
 def decision_path(obstacle_angle, ANGLE_CLASS):
@@ -59,16 +58,20 @@ def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGL
     return img, return_angle
 
 def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS):
+
     seg_img, only_sidewalk = seg_predict(img,model)
-    depth = point2dist(point_cloud, 1/4)
+    depth = point2dist(point_cloud, 1/16)
+
     only_sidewalk_limited_dist = only_sidewalk.copy()
     only_sidewalk_limited_dist[(depth>max_dist)] = 0
     obstacle = img.copy()
     obstacle_depth = img.copy()
+
     obstacle_depth[(depth>max_dist)] = 0
     obj_frame, moving_object, _  = YOLO(obstacle_depth)
     obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
     redundant_obstacle = obstacle.copy()
+
 
     obstacle_depth[(depth>fix_dist)] = 0
     redundant_obstacle[(depth>fix_dist)] = 0
@@ -78,7 +81,7 @@ def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_C
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
     for i in fixed_object:
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
-        
+
     selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
 
     return selly_vision, angle

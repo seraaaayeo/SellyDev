@@ -5,16 +5,18 @@ from selly_vision_api import *
 from PIL import Image
 import base64
 import io
+import time
 
 app = Flask(__name__)
 
 @app.route('/vision_angle', methods=['POST'])
 def vision_angle():
     if request.method == 'POST':
-        img = request.files['file']
+        img = request.files['img']
         img_bytes = img.read()
-        result = selly_vision(img_bytes)[1]
-    print("send!")
+        point = request.files['point']
+        point_bytes = point.read()
+        result = selly_vision(img_bytes, point_bytes)[1]
     return str(result)
 
 @app.route('/vision_img', methods=['POST'])
