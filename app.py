@@ -19,18 +19,3 @@ def vision_angle():
         result = selly_vision(img_bytes, point_bytes)[1]
     return str(result)
 
-@app.route('/vision_img', methods=['POST'])
-def vision_img():
-    if request.method == 'POST':
-        file = request.files['file']
-        img_bytes = file.read()
-        result = selly_vision(img_bytes)[0]
-        img = Image.fromarray(result, 'RGB')
-        img_byte_arr = io.BytesIO()
-        img.save(img_byte_arr, format='PNG')
-        encoded_img = base64.encodebytes(img_byte_arr.getvalue()).decode('ascii')
-        data = {}
-        data["key"] = {"result_img": encoded_img}
-    print("send!")
-
-    return jsonify(data) 

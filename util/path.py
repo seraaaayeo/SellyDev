@@ -16,9 +16,8 @@ def decision_path(obstacle_angle, ANGLE_CLASS):
             angle_dict[i] = 0
     return angle_dict
 
-def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGLE_CLASS, ANGLE_DICT):
-    redundant_obstacle = vision_angle(ANGLE_DICT, redundant_obstacle)
-    path_dict_redundant = decision_path(redundant_obstacle, ANGLE_CLASS)
+def selly_vision_path(img, redundant_obstacle_angle, fixed_object, moving_object, ANGLE_CLASS, ANGLE_DICT):
+    path_dict_redundant = decision_path(redundant_obstacle_angle, ANGLE_CLASS)
     angle_range = []
     center = (240, 270)
 
@@ -57,9 +56,9 @@ def selly_vision_path(img, redundant_obstacle, fixed_object, moving_object, ANGL
     
     return img, return_angle
 
-def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS):
+def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG):
 
-    seg_img, only_sidewalk = seg_predict(img,model)
+    only_sidewalk = seg_predict(img,model)
     depth = point2dist(point_cloud, 1/16)
 
     only_sidewalk_limited_dist = only_sidewalk.copy()
@@ -82,7 +81,10 @@ def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_C
     for i in fixed_object:
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
 
-    selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
+    redundant_obstacle_angle = ANGLE_IMG.copy()
+    redundant_obstacle_angle[redundant_obstacle==0] = 0
+
+    selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle_angle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
 
     return selly_vision, angle
 
@@ -92,21 +94,20 @@ def seg_predict(img, model):
     frame/=255
     pre = model.predict(frame[tf.newaxis, ...])
     pre = create_mask(pre).numpy()
-    frame2 = frame/2
-    frame2[(pre==1).all(axis=2)] += [0, 0, 0] #""bike_lane_normal", "sidewalk_asphalt", "sidewalk_urethane""
-    frame2[(pre==2).all(axis=2)] += [0.5, 0.5,0] # "caution_zone_stairs", "caution_zone_manhole", "caution_zone_tree_zone", "caution_zone_grating", "caution_zone_repair_zone"]
-    frame2[(pre==3).all(axis=2)] += [0.2, 0.7, 0.5] #"alley_crosswalk","roadway_crosswalk"
-    frame2[(pre==4).all(axis=2)] += [0, 0.5, 0.5] #"braille_guide_blocks_normal", "braille_guide_blocks_damaged"
-    frame2[(pre==5).all(axis=2)] += [0, 0, 0.5] #"roadway_normal","alley_normal","alley_speed_bump", "alley_damaged""
-    frame2[(pre==6).all(axis=2)] += [0.5, 0, 0] #"sidewalk_blocks","sidewalk_cement" , "sidewalk_soil_stone", "sidewalk_damaged","sidewalk_other"
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    '''frame2 = frame/2
+    1 ""bike_lane_normal", "sidewalk_asphalt", "sidewalk_urethane""
+    2  "caution_zone_stairs", "caution_zone_manhole", "caution_zone_tree_zone", "caution_zone_grating", "caution_zone_repair_zone"]
+    3"alley_crosswalk","roadway_crosswalk"
+    4"braille_guide_blocks_normal", "braille_guide_blocks_damaged"
+    5"roadway_normal","alley_normal","alley_speed_bump", "alley_damaged""
+    6"sidewalk_blocks","sidewalk_cement" , "sidewalk_soil_stone", "sidewalk_damaged","sidewalk_other"
+    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)'''
 
-    frame[(pre!=6).all(axis=2)]=0
+    frame[((pre!=4) & (pre!=6) & (pre!=1)).all(axis=2)]=0
     
     frame = cv2.resize(frame,(480,270))
-    frame2 = cv2.resize(frame2,(480,270))
 
-    return frame2, frame
+    return frame
 
 def create_mask(pred_mask):
     pred_mask = tf.argmax(pred_mask, axis=-1)

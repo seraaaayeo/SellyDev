@@ -21,4 +21,9 @@ def vision_angle(angle, obstacle):
     obstacle[obstacle!=0] = np.array(list(map(lambda x : angle[str(x[0])+","+str(x[1])] , obs_idx)))
     return obstacle
     
-    
+def angle_img(angle, ANGLE_CLASS):
+    img = np.zeros((270,480,3))
+    for i in range(270):
+            for j in range(480):
+                img[i,j,:] = angle[str(i)+","+str(j)]     
+    return img
