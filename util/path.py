@@ -57,23 +57,22 @@ def selly_vision_path(img, redundant_obstacle_angle, fixed_object, moving_object
     return img, return_angle
 
 def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG):
-
     only_sidewalk = seg_predict(img,model)
-    depth = point2dist(point_cloud, 1/16)
+    depth = point2dist(point_cloud,  1/4)
 
     only_sidewalk_limited_dist = only_sidewalk.copy()
     only_sidewalk_limited_dist[(depth>max_dist)] = 0
+
     obstacle = img.copy()
     obstacle_depth = img.copy()
-
     obstacle_depth[(depth>max_dist)] = 0
+
     obj_frame, moving_object, _  = YOLO(obstacle_depth)
     obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
     redundant_obstacle = obstacle.copy()
-
-
     obstacle_depth[(depth>fix_dist)] = 0
     redundant_obstacle[(depth>fix_dist)] = 0
+
     _, _, fixed_object  = YOLO(obstacle_depth)
 
     for i in moving_object:

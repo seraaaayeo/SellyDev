@@ -12,7 +12,7 @@ import io
 from PIL import Image
 import datetime
 
-r = redis.StrictRedis(host='123.254.187.65' ,port=6379)
+r = redis.StrictRedis(port=6379)
 
 def img2byte(image_ocv):
     image = Image.fromarray(image_ocv,'RGB')
@@ -38,5 +38,8 @@ while True:
     point_cloud_data = point_cloud[i].copy()
     point_cloud_data= cv2.resize(point_cloud_data, (120,67))
     r.hmset('zed_img', {"img" : str(img2byte(image_ocv)), "point" : point2byte(point_cloud_data), "time" : start_time})
+
     i+=1
+    #data = r.hgetall('zed_img')
+
     print(time.time() - start_time)

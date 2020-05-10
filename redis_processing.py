@@ -8,7 +8,7 @@ import time
 from datetime import datetime
 from util.selly_vision_api import *
 
-r = redis.StrictRedis(host='123.254.187.65' ,port=6379)
+r = redis.StrictRedis(port=6379)
 first_time = r.hget('zed_img', 'time')
 
 while True:
