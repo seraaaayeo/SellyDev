@@ -1,6 +1,6 @@
 # Image analysis project for object avoidance 
 
-![ezgif com-optimize (3)](https://user-images.githubusercontent.com/52908154/79710635-97e7a200-8300-11ea-8067-691b4fd930e0.gif)
+![ezgif com-optimize (11)](https://user-images.githubusercontent.com/52908154/81503161-18585c00-931d-11ea-8954-599d4eebb8e1.gif)
 
 #### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
@@ -8,11 +8,11 @@
 
 ### 1. Receive image and point cloud from camera.
 
-<img src= "https://user-images.githubusercontent.com/52908154/80001163-05f6b980-84f9-11ea-9566-101b69783483.png" width="70%"></img>
+<img src= "https://user-images.githubusercontent.com/52908154/81503230-68cfb980-931d-11ea-9132-758583537914.png" width="70%"></img>
 
 ### 2. Use object detection, image segmentation, depth images to determine obstacles.
 
-<img src= "https://user-images.githubusercontent.com/52908154/80002651-dd6fbf00-84fa-11ea-9849-f119be3d8e30.png" width="80%"></img>
+<img src= "https://user-images.githubusercontent.com/52908154/81503254-8b61d280-931d-11ea-9aa2-b9823b09553b.png" width="80%"></img>
 
 * #### Obtain a distance within 5M of the depth image.
 * #### Locate a part that is not recognized as a sidewalk in image segmentation.
@@ -26,7 +26,7 @@
 
 ### 4. It is now time to distinguish the types of obstacles.
 
-<img src= "https://user-images.githubusercontent.com/52908154/80003326-d1d0c800-84fb-11ea-881c-5ac8f26b9c9b.png" width="80%"></img>
+<img src= "https://user-images.githubusercontent.com/52908154/81503271-a0d6fc80-931d-11ea-8fd1-67dd5fa37f89.png" width="80%"></img>
 
 * #### Generally, for mobile devices, avoiding preparations should be made from a distance. 
 * #### Prepare to avoid objects that come in less than 5m as a result of object detection
@@ -34,7 +34,7 @@
 * #### So the red circle, which is more than 2.5 meters away, is not marked as an obstacle.
 
 ### 5. path determination
-<img src= "https://user-images.githubusercontent.com/52908154/80003782-77843700-84fc-11ea-8fae-32806499a355.png" width="40%"></img>
+<img src= "https://user-images.githubusercontent.com/52908154/81503290-c82dc980-931d-11ea-927b-24cd20368680.png" width="40%"></img>
 
 * #### Indicates a movable direction based on the angle of the obstacle.
 
