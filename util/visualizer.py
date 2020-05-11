@@ -32,7 +32,7 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, A
     ori_img = img.copy()
     seg_img, only_sidewalk = seg_predict(img,model)
     yolo_img, _, __ = YOLO(img.copy())
-    depth = point2dist(point_cloud, 1/16)
+    depth = point2dist(point_cloud, 1/4)
     only_sidewalk_limited_dist = only_sidewalk.copy()
     only_sidewalk_limited_dist[(depth>max_dist)] = 0
     obstacle = img.copy()

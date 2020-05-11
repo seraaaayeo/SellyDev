@@ -13,8 +13,10 @@ import io
 from PIL import Image
 import datetime
 from multiprocessing import Pool
+import asyncio
 
-r = redis.StrictRedis(port=6379)
+r = redis.StrictRedis(host='123.254.187.65' ,port=6379)
+loop = asyncio.get_event_loop()
 
 def img2byte(image_ocv):
     image = Image.fromarray(image_ocv,'RGB')
@@ -25,6 +27,21 @@ def img2byte(image_ocv):
 
 def point2byte(point):
     return point_cloud_data.tobytes()
+
+def send_img(image_ocv, point_cloud_data , start_time): 
+    r.hmset('zed_img', {"img" : str(img2byte(image_ocv)), "point" : point_cloud_data.tobytes(), "time" : start_time})
+
+async def main():
+    while True:
+        start_time = time.time()
+        err = zed.grab(runtime)
+        if err == sl.ERROR_CODE.SUCCESS :
+            zed.retrieve_image(image_zed,sl.VIEW.LEFT, sl.MEM.CPU, image_size)
+            zed.retrieve_measure(point_cloud, sl.MEASURE.XYZ,  sl.MEM.CPU, point_size)
+            image_ocv = image_zed.get_data()[:,:,:3]
+            point_cloud_data =point_cloud.get_data()[:,:,:3]
+            await loop.run_in_executor(None, send_img,image_ocv, point_cloud_data , start_time)
+            print(time.time() - start_time)
 
 zed = sl.Camera()
 input_type = sl.InputType()
@@ -55,16 +72,4 @@ point_size.height = point_size.height/16
 
 image_zed, point_cloud = sl.Mat(), sl.Mat()
 
-
-while True:
-    start_time = time.time()
-    dt = datetime.datetime.now().strftime('%H:%M:%S')
-    err = zed.grab(runtime)
-    if err == sl.ERROR_CODE.SUCCESS :
-        zed.retrieve_image(image_zed,sl.VIEW.LEFT, sl.MEM.CPU, image_size)
-        zed.retrieve_measure(point_cloud, sl.MEASURE.XYZ,  sl.MEM.CPU, point_size)
-
-        image_ocv = image_zed.get_data()[:,:,:3]
-        point_cloud_data =point_cloud.get_data()[:,:,:3]
-        r.hmset('zed_img', {"img" : str(img2byte(image_ocv)), "point" : point2byte(point_cloud_data), "time" : start_time})
-        print(time.time() - start_time)
+loop.run_until_complete(asyncio.gather(main(),main(),main(),main(),main()))

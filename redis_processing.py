@@ -14,7 +14,7 @@ first_time = r.hget('zed_img', 'time')
 while True:
     st = time.time()
     data = r.hgetall('zed_img')
-    if first_time == data.get('time'.encode()):
+    if first_time.decode() >= data.get('time'.encode()).decode():
         continue
     first_time =  data.get('time'.encode())
     #dt = datetime.now().strftime('%H:%M:%S')
@@ -46,8 +46,8 @@ while True:
 
     r.hmset('result', {"result" : str(result[1]), "time" : st})
 
-    '''cv2.imshow(" ", result[0]/255)
-    cv2.waitKey(1)'''
+    cv2.imshow(" ", result[0]/255)
+    cv2.waitKey(1)
     #print(result[1])
     print(time.time()-st)
 
