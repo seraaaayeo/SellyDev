@@ -14,8 +14,8 @@
 ***
 
 ## Test Project
-* [software](https://github.com/seraaaayeo/SellyDev/tree/software) : lidar, rasberry camera, arduino motor test codes and Practice code about auto-driving robot
 * [selly_motor](https://github.com/seraaaayeo/SellyDev/tree/selly_motor) : arduino ROS subscriber and jetson nano ROS publisher, which controll motor
+* [software](https://github.com/seraaaayeo/SellyDev/tree/software) : lidar, rasberry camera, arduino motor test codes and Practice code about auto-driving robot
 
 ***
 
