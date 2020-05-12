@@ -47,4 +47,4 @@ def selly_vision_redis(img, point, moving_dist=5, fixed_dist=2.5):
     return selly_vision_img(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
 
 def selly_vision_visual(img, point, moving_dist=5, fixed_dist=2.5):
-    return image_pred(model, img, point, 5, 2.5, ANGLE, ANGLE_CLASS, ANGLE_IMG)
+    return image_pred(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)

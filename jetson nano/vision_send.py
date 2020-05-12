@@ -14,7 +14,7 @@ from PIL import Image
 import datetime
 from multiprocessing import Pool
 
-r = redis.StrictRedis(port=6379)
+r = redis.StrictRedis(host='123.254.187.65' ,port=6379)
 
 def img2byte(image_ocv):
     image = Image.fromarray(image_ocv,'RGB')
