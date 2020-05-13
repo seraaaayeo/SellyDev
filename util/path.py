@@ -67,32 +67,43 @@ def selly_vision_img(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_C
     obstacle_depth = img.copy()
     obstacle_depth[(depth>max_dist)] = 0
 
-    obj_frame, moving_object, _  = YOLO(obstacle_depth)
+    obj_frame, moving_object, fixed_object  = YOLO(obstacle_depth)
+    moving_object = object_dist(moving_object, depth, max_dist)
+    fixed_object = object_dist(fixed_object, depth, max_dist)
+
     obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
     redundant_obstacle = obstacle.copy()
-    obstacle_depth[(depth>fix_dist)] = 0
-    redundant_obstacle[(depth>fix_dist)] = 0
-
-    _, _, fixed_object  = YOLO(obstacle_depth)
 
     for i in moving_object:
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
+        
+    fixed_object_limit = fixed_object.copy()
     for i in fixed_object:
         redundant_obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
+        if fix_dist<i[2]:
+            fixed_object_limit.remove(i)
+        
+
+    redundant_obstacle[depth> fix_dist]=0
+
 
     redundant_obstacle_angle = ANGLE_IMG.copy()
     redundant_obstacle_angle[redundant_obstacle==0] = 0
 
-    selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle_angle.copy(), fixed_object, moving_object, ANGLE_CLASS, ANGLE)
+    selly_vision, angle = selly_vision_path(img.copy(), redundant_obstacle_angle.copy(), fixed_object_limit, moving_object, ANGLE_CLASS, ANGLE)
 
     return selly_vision, angle
 
-def seg_predict(img, model):
+def seg_predict(img, infer):
     frame = cv2.resize(img,(480,272))
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame/=255
-    pre = model.predict(frame[tf.newaxis, ...])
-    pre = create_mask(pre).numpy()
+
+    #tensorrt model
+    trt = infer(tf.convert_to_tensor(frame[tf.newaxis, ...]))
+    trt = trt['conv2d_37'].numpy()
+    
+    pre = create_mask(trt).numpy()
     '''frame2 = frame/2
     1 ""bike_lane_normal", "sidewalk_asphalt", "sidewalk_urethane""
     2  "caution_zone_stairs", "caution_zone_manhole", "caution_zone_tree_zone", "caution_zone_grating", "caution_zone_repair_zone"]
@@ -112,3 +123,26 @@ def create_mask(pred_mask):
     pred_mask = tf.argmax(pred_mask, axis=-1)
     pred_mask = pred_mask[..., tf.newaxis]
     return pred_mask[0]   
+
+def object_dist(array, depth, max_dist):
+    
+    lenght = int(max_dist/0.5) -2
+    
+    for i in array:
+        object_depth_dist = [] 
+        object_rate = np.zeros(lenght)
+        for j in range(lenght):
+            object_dist= depth[i[0][1] :i[1][1], i[0][0] : i[1][0], :].copy()
+            object_dist[object_dist > max_dist-(0.5*j)] = 0
+            object_depth_dist.append(object_dist)
+
+        for j in range(1, lenght-1):
+            if object_depth_dist[j+1][object_depth_dist[j+1]!=0].shape[0] == 0:
+                object_rate=object_rate[:j+1]
+                break
+            ratio = object_depth_dist[j+1][object_depth_dist[j+1]!=0].shape[0] / object_depth_dist[j][object_depth_dist[j]!=0].shape[0]
+            object_rate[j] = round(ratio,2)
+
+        i.append(max_dist-(0.5*(len(object_rate)-1)))
+
+    return array

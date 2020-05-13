@@ -5,12 +5,17 @@ from util.depth import *
 from util.path import *
 from util.object_dection import *
 
-def seg_predict(img, model):
+def seg_predict_visual(img, model):
     frame = cv2.resize(img,(480,272))
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame/=255
-    pre = model.predict(frame[tf.newaxis, ...])
-    pre = create_mask(pre).numpy()
+    
+    #tensorrt model
+    trt = model(tf.convert_to_tensor(frame[tf.newaxis, ...]))
+    trt = trt['conv2d_37'].numpy()
+    
+    pre = create_mask(trt).numpy()
+    
     frame2 = frame/2
     frame2[(pre==1).all(axis=2)] += [0, 0, 0] #""bike_lane_normal", "sidewalk_asphalt", "sidewalk_urethane""
     frame2[(pre==2).all(axis=2)] += [0.5, 0.5,0] # "caution_zone_stairs", "caution_zone_manhole", "caution_zone_tree_zone", "caution_zone_grating", "caution_zone_repair_zone"]
@@ -30,7 +35,7 @@ def seg_predict(img, model):
 def visualize(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG):
     max_dist = max_dist
     ori_img = img.copy()
-    seg_img, only_sidewalk = seg_predict(img,model)
+    seg_img, only_sidewalk = seg_predict_visual(img,model)
     yolo_img, _, __ = YOLO(img.copy())
     depth = point2dist(point_cloud, 1/4)
     only_sidewalk_limited_dist = only_sidewalk.copy()
@@ -39,6 +44,10 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, A
     obstacle_depth = img.copy()
     obstacle_depth[(depth>max_dist)] = 0 
     obj_frame, moving_object, fixed_object = YOLO(obstacle_depth)
+    moving_object = object_dist(moving_object, depth, max_dist)
+    fixed_object = object_dist(fixed_object, depth, max_dist)
+
+    
     obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
     obs_obj = (obstacle).copy()
     for i in moving_object:
@@ -71,20 +80,24 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, A
     fixed_obstacle[(moving_obstacle==0) & (obstacle!=0)] = obstacle[(moving_obstacle==0) & (obstacle!=0)]
     fixed_obstacle[(depth> fix_dist)] = 0
     obstacle_depth[(depth> fix_dist)] = 0
-    _, _, fixed_object = YOLO(obstacle_depth)
 
+    fixed_object_limit = fixed_object.copy()
+    for i in fixed_object:
+        if fix_dist<i[2]:
+            fixed_object_limit.remove(i)
+        
 
     for i in moving_object:
         cv2.rectangle(moving_obstacle, i[0], i[1], (100, 255 ,255), 3) 
         cv2.putText(moving_obstacle,
-                                "Moving object",
+                                str(i[2])+"M",
                                 (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                                 [0, 255, 0], 2)
 
-    for i in fixed_object:
+    for i in fixed_object_limit:
         cv2.rectangle(fixed_obstacle, i[0], i[1], (255, 100 ,255), 3) 
         cv2.putText(fixed_obstacle,
-                                "Fixed_object",
+                                str(i[2])+"M",
                                 (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                                 [0, 255, 0], 2)
 

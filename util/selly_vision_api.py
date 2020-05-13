@@ -1,23 +1,14 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import math
 import tensorflow as tf
-import time
-from model.pspunet import pspunet
 from util.angle import *
 from util.depth import *
 from util.path import *
 from util.visualizer import *
 from util.object_dection import *
-from PIL import Image
-import io
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
-
-IMG_WIDTH = 480
-IMG_HEIGHT = 272
-n_classes = 7
 
 if gpus:
     try:
@@ -26,9 +17,9 @@ if gpus:
         [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=500)])
     except RuntimeError as e:
         print(e)
-        
-model = pspunet((IMG_HEIGHT, IMG_WIDTH ,3), n_classes)
-model.load_weights("pspunet_weight.h5")
+    
+loaded = tf.saved_model.load("./trt_fp16")
+infer = loaded.signatures["serving_default"]
 
 ANGLE_CLASS = 18
 
@@ -44,7 +35,7 @@ def selly_vision(img, point, moving_dist=5, fixed_dist=2.5):
     return result
 
 def selly_vision_redis(img, point, moving_dist=5, fixed_dist=2.5):
-    return selly_vision_img(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
+    return selly_vision_img(infer, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
 
 def selly_vision_visual(img, point, moving_dist=5, fixed_dist=2.5):
-    return image_pred(model, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
+    return image_pred(infer, img, point, moving_dist, fixed_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)

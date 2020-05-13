@@ -27,13 +27,13 @@ while True:
     img = base64.b64decode(img.decode())
     img = Image.open(io.BytesIO(img)) 
     img = np.array(img, dtype=np.float32)
-    #img = cv2.resize(img, (480,270))
+    #img = cv2.resize(img, (480, 270))
 
     point = data.get('point'.encode())
     point = np.frombuffer(point, dtype=np.float32)
     point = np.reshape(point,(67,120,3))
 
-    result = selly_vision_redis(img.copy(), point.copy(),fixed_dist=1)
+    result = selly_vision_redis(img.copy(), point.copy(), fixed_dist=1)
 
     #result = selly_vision_visual(img.copy(), point.copy(),fixed_dist=0.7)
 
