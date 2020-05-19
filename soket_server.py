@@ -27,24 +27,34 @@ print('server start')
 
 client_socket, addr = server_socket.accept() 
 
+start= time.time()
 while True: 
-    print('wait')
-    start= time.time()
-    img_length = recvall(client_socket,16)
-    img_data = recvall(client_socket, int(img_length))
-    '''point_length = recvall(client_socket,16)
-    point_data = recvall(client_socket, int(point_length))'''
-    img_data = np.frombuffer(img_data, dtype='uint8') 
-    #print(img_length, point_length)
-    '''point_data = np.frombuffer(point_data, dtype='float32') 
-    point_data = np.reshape(point_data, (67,120,3))'''
-    img_data=cv2.imdecode(img_data,1)
-    img_data = np.array(img_data, dtype=np.float32)
-    #result = selly_vision_redis(img_data.copy(), point_data.copy(), fixed_dist=1)
-    cv2.imshow(" ", img_data/255)
-    cv2.waitKey(1)
-    print(time.time() - start)
+    try:
+        img_length = recvall(client_socket,16)
+        img_data = recvall(client_socket, int(img_length))
+        img_data = np.frombuffer(img_data, dtype='uint8') 
+        point_length = recvall(client_socket,16)
+        point_data = recvall(client_socket, int(point_length))
+        point_data = np.frombuffer(point_data, dtype='uint8') 
 
+        img_data = cv2.imdecode(img_data,1)
+        point_data = cv2.imdecode(point_data,1)
+
+        img_data = np.array(img_data, dtype=np.float32)
+        point_data = np.array(point_data, dtype=np.float32)
+        point_data = (point_data/255)*30
+        point_data = cv2.resize(point_data, (480, 270))
+
+        result = selly_vision_redis(img_data.copy(), point_data.copy(), fixed_dist=1)
+
+        #client_socket.sendall(str(result[1]).encode())
+
+        cv2.imshow(" ", result[0]/255)
+        cv2.waitKey(1)
+        print(time.time() - start)
+        start= time.time()
+    except:
+        client_socket, addr = server_socket.accept() 
 
 
 

@@ -11,6 +11,17 @@ import base64
 HOST = '123.254.187.65'
 PORT = 9999
 
+def point2dist(arr): 
+    width, height = int(480 * 1/4), int(270 * 1/4)
+    arr  = cv2.resize(arr, (width ,height))
+    arr = np.reshape(arr, (height*width,3))
+    dist = np.sqrt(np.sum(np.square(arr), axis = 1))
+    dist = np.reshape(dist, (height,width,1))
+    dist = np.concatenate((dist,dist, dist), axis=2)
+    dist[(dist>30)] = 30
+    dist = cv2.resize(dist, (120 ,67))
+    return dist
+
 zed = sl.Camera()
 
 input_type = sl.InputType()
@@ -60,16 +71,31 @@ while True:
         zed.retrieve_image(image_zed,sl.VIEW.LEFT, sl.MEM.CPU, image_size)
         zed.retrieve_measure(point_cloud, sl.MEASURE.XYZ,  sl.MEM.CPU, point_size)
         image_ocv = image_zed.get_data()[:,:,:3]
-        point_cloud_data =point_cloud.get_data()[:,:,:3]
+        point_cloud_data = point_cloud.get_data()[:,:,:3]
+        point_cloud_data = point2dist(point_cloud_data)
+        point_cloud_data = (point_cloud_data*255)/30
+        point_cloud_data = np.array(point_cloud_data, dtype = np.uint8)
 
-    point_cloud_data = point_cloud_data.tobytes()
-    result, imgencode = cv2.imencode('.jpg', image_ocv)
-    data = np.array(imgencode)
-    stringData = data.tostring()
-    client_socket.send(str(len(stringData)).ljust(16).encode())
-    client_socket.send(stringData)
-    client_socket.send(str(len(point_cloud_data)).ljust(16).encode())
-    client_socket.send(point_cloud_data)
-    print(time.time() - start_time)
+
+    _, img_encode = cv2.imencode('.jpg', image_ocv)
+    img_data = np.array(img_encode)
+    img2str = img_data.tostring()
+
+    _, depth_encode = cv2.imencode('.jpg', point_cloud_data)
+    depth_data = np.array(depth_encode)
+    depth2str = depth_data.tostring()
+
+    client_socket.send(str(len(img2str)).ljust(16).encode())
+    client_socket.send(img2str)
+
+    client_socket.send(str(len(depth2str)).ljust(16).encode())
+    client_socket.send(depth2str)
+
+    '''msg = client_socket.recv(1024)
+    msg = msg.decode()'''
+
+    #print("주행 가능 방향 : ", msg)
+    print("경과 시간 : ", round(time.time() - start_time, 3),"초")
+
 client_socket.close() 
 
