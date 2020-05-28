@@ -5,8 +5,10 @@ from util.depth import *
 from util.path import *
 from util.object_dection import *
 
-def seg_predict_visual(img, model):
+def seg_predict_visual(img, point, model):
     frame = cv2.resize(img,(480,272))
+    point = cv2.resize(point,(480,272))
+
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame/=255
     
@@ -33,209 +35,197 @@ def seg_predict_visual(img, model):
     return frame2, frame
     
 def visualize(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG):
-    max_dist = max_dist
     ori_img = img.copy()
-    seg_img, only_sidewalk = seg_predict_visual(img,model)
-    yolo_img, _, __ = YOLO(img.copy())
-    depth = point2dist(point_cloud, 1/4)
-    only_sidewalk_limited_dist = only_sidewalk.copy()
-    only_sidewalk_limited_dist[(depth>max_dist)] = 0
-    obstacle = img.copy()
-    obstacle_depth = img.copy()
-    obstacle_depth[(depth>max_dist)] = 0 
-    obj_frame, moving_object, fixed_object = YOLO(obstacle_depth)
-    moving_object = object_dist(moving_object, depth, max_dist)
-    fixed_object = object_dist(fixed_object, depth, max_dist)
+    seg_img, only_sidewalk = seg_predict_visual(img, point_cloud.copy() ,model)
+    obj_frame, moving_object, fixed_object  = YOLO(img.copy())
+    point = point_cloud.copy()
+    point[200 :,:, 2][(point[200 :,:, 2] >5) & (only_sidewalk[200:,:,0] !=0)] = np.mean(point[:,:, 2][(point[:,:, 2]<2)& (only_sidewalk[:,:,0] !=0)])
+    point[200 :,:, 1][(point[200 :,:, 1] >3) & (only_sidewalk[200:,:,0] !=0)] = np.mean(point[:,:, 1][(point[:,:, 1]<3)& (only_sidewalk[:,:,0] !=0)])
+    point[200 :,:, 0][(point[200 :,:, 0] ==np.inf) | (np.abs(point[200 :,:, 0])>2)] = np.mean(point[200:,:, 0][point[200:,:, 0]<2])
+    point[:,:, 2][point[:,:, 2]==np.inf] = 40
+    seg_img[((point[:,:,1] < -3) |  (point[:,:,1] ==np.inf)) & (only_sidewalk[:,:,1]!=0)] -= [0.5, 0, 0]  #일정 높이 이상 segmetation 오차 제거
+    only_sidewalk[(point[:,:,1] < -3) |  (point[:,:,1] ==np.inf)] = 0  #일정 높이 이상 segmetation 오차 제거
 
+    depth = point2dist(point)
+    obstacle = np.ones_like(img)
+    obstacle[only_sidewalk!=0] = 0
+    obstacle[(point[:,:,1] < -3) |  (point[:,:,1] ==np.inf)]=0 #일정 높이이상 장애물 제거
+
+    obstacle_visual = obstacle.copy()
+    obstacle_moving = img.copy()/2
+    obstacle_fixed = img.copy()/2
+
+    angle = point.copy()
+    angle[angle[:, :,2]==np.inf]=1
+    angle = np.arctan((angle[:, :,0]/angle[:,:,2]
+                            ))/np.pi * 180
+    angle = angle[:,:, np.newaxis]
+    angle= np.concatenate((angle,angle,angle) , axis = 2)
+
+    moving_object_position, fixed_object_position =[] ,[]
     
-    obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
-    obs_obj = (obstacle).copy()
-    for i in moving_object:
-        cv2.rectangle(obs_obj, i[0], i[1], (100, 255 ,255), 3) 
-        cv2.putText(obs_obj,
-                        "Moving object",
+    if len(moving_object):
+        moving_object_position = object_dist(moving_object, point.copy(), depth)
+        moving_object_angle = object_angle(moving_object, angle.copy(), depth)     
+    if len(fixed_object):
+        fixed_object_position = object_dist(fixed_object, point.copy(), depth)
+        fixed_object_angle = object_angle(fixed_object, angle.copy(), depth)     
+  
+    for i, j in zip(moving_object, moving_object_position):
+        obstacle_visual[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
+        cv2.rectangle(obstacle_visual, i[0], i[1], (1, 1 ,1), 3) 
+        cv2.putText(obstacle_visual,
+                        str(j[2])+"M",
                         (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         [0, 255, 0], 2)
-
-    for i in fixed_object:
-        cv2.rectangle(obs_obj, i[0], i[1], (255, 100 ,255), 3) 
-        cv2.putText(obs_obj,
-                        "Fixed_object",
+        cv2.rectangle(obstacle_moving, i[0], i[1], (255, 255 ,100), 3) 
+        cv2.putText(obstacle_moving,
+                        str(j[2])+"M",
                         (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         [0, 255, 0], 2)
+        obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
 
+    for i, j in zip(fixed_object, fixed_object_position):
+        obstacle_visual[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0
+        cv2.rectangle(obstacle_visual, i[0], i[1], (1, 1 ,1), 3) 
+        cv2.putText(obstacle_visual,
+                        str(j[2])+"M",
+                        (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                        [0, 255, 0], 2)
+        cv2.rectangle(obstacle_fixed, i[0], i[1], (255, 100 ,255), 3) 
+        cv2.putText(obstacle_fixed,
+                        str(j[2])+"M",
+                        (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                        [0, 255, 0], 2)
+        obstacle[i[0][1] :i[1][1], i[0][0] : i[1][0], :] = 0    
 
-    obstacle_angle =  vision_angle(ANGLE, obstacle)
+    '''angle_max = int(np.max(point[:,:,0][point[:,:,0]!= np.inf]))
+    angle_min = int(np.min(point[:,:,0]))
+    able_angle = [ i for i in range(angle_min, angle_max, 1) ] 
+    
+    for i in moving_object_position:
+        if i[2] < max_dist:
+            for j in range(int(i[0])-1, int(i[1])+1, 1):
+                if j in able_angle:
+                    able_angle.remove(j)
 
-    moving_obstacle = np.zeros_like(obstacle)
-    fixed_obstacle = np.zeros_like(obstacle)
+    for i in fixed_object_position:
+        if i[2] < fix_dist:
+            for j in range(int(i[0])-1, int(i[1])+1,1 ):
+                if j in able_angle:
+                    able_angle.remove(j)
 
-    for i in moving_object:
-        crop_obstacle_angle = obstacle_angle[i[0][1] : i[1][1], i[0][0] : i[1][0], :]
-        obj = np.zeros((i[1][1] - i[0][1],i[1][0] - i[0][0],3))
-        obj[crop_obstacle_angle!=0] = crop_obstacle_angle[crop_obstacle_angle!=0]
-        moving_obstacle[i[0][1] : i[1][1], i[0][0] : i[1][0], :] = obj
+    for i in able_angle:
+        obs_angle = obstacle[(angle > i-1) & (angle < i+1) & (obstacle!=0)].shape[0]'''
 
-
-    fixed_obstacle[(moving_obstacle==0) & (obstacle!=0)] = obstacle[(moving_obstacle==0) & (obstacle!=0)]
-    fixed_obstacle[(depth> fix_dist)] = 0
-    obstacle_depth[(depth> fix_dist)] = 0
-
-    fixed_object_limit = fixed_object.copy()
-    for i in fixed_object:
-        if fix_dist<i[2]:
-            fixed_object_limit.remove(i)
-        
-
-    for i in moving_object:
-        cv2.rectangle(moving_obstacle, i[0], i[1], (100, 255 ,255), 3) 
-        cv2.putText(moving_obstacle,
-                                str(i[2])+"M",
-                                (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                                [0, 255, 0], 2)
-
-    for i in fixed_object_limit:
-        cv2.rectangle(fixed_obstacle, i[0], i[1], (255, 100 ,255), 3) 
-        cv2.putText(fixed_obstacle,
-                                str(i[2])+"M",
-                                (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                                [0, 255, 0], 2)
-
-
-    selly_vision, angle = selly_vision_img(model, img.copy(), point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
-
-    plt.figure(figsize=(20,16))
-    plt.subplot(4,3,2)
+    plt.figure(figsize=(20,6))
+    plt.subplot(2,4,1)
     plt.axis("off")
     plt.title("img")
     plt.imshow(RGB(ori_img/255))
 
-    plt.subplot(4,3,4)
+    plt.subplot(2,4,2)
     plt.axis("off")
     plt.title("depth")
-    plt.imshow(depth/20)
+    plt.imshow(depth/40)
 
-    plt.subplot(4,3,5)
+    plt.subplot(2,4,3)
     plt.axis("off")
     plt.title("segementation")
     plt.imshow(RGB(seg_img))
 
-    plt.subplot(4,3,6)
+    plt.subplot(2,4,4)
     plt.axis("off")
     plt.title("object detection")
-    plt.imshow(RGB(yolo_img))
+    plt.imshow(RGB(obj_frame))
+    
 
-    '''plt.subplot(3,3,5)
+    plt.subplot(2,4,5)
     plt.axis("off")
-    plt.title( "only sidewalk in "+str(max_dist)+"M")
-    plt.imshow(RGB(only_sidewalk_limited_dist))
+    plt.title( "obstacle")
+    plt.imshow(obstacle_visual)
 
-    plt.subplot(3,3,6)
+
+    plt.subplot(2,4,6)
     plt.axis("off")
-    plt.title( "img in "+str(max_dist)+"M")
-    plt.imshow(RGB(obstacle_depth/255))
+    plt.title( "obstacle moving")
+    plt.imshow(RGB(obstacle_moving)/255)
 
-    plt.subplot(3,3,7)
+    plt.subplot(2,4,7)
     plt.axis("off")
-    plt.title("only sidewalk")
-    plt.imshow(RGB(only_sidewalk))'''
-
-    plt.subplot(4,3,7)
+    plt.title( "obstacle fixed")
+    plt.imshow(RGB(obstacle_fixed)/255)    
+    
+    plt.subplot(2,4,8)
     plt.axis("off")
-    plt.title( "obstacle in "+str(max_dist)+"M")
-    plt.imshow(obs_obj)
+    plt.title( "obstacle other")
+    plt.imshow(obstacle)
 
-    '''plt.subplot(3,3,6)
-    plt.axis("off")
-    plt.title( "obstacle angle")
-    plt.imshow(obstacle_angle/(ANGLE_CLASS))'''
+    plt.figure(figsize=(15,7))
+    moving_object_position_x = (moving_object_position[:, 0]+moving_object_position[:, 1])/2
+    fixed_object_position_x = (fixed_object_position[:, 0]+fixed_object_position[:, 1])/2
+    
+    sidewalk_x = point[:, :, 0][(only_sidewalk[:, :, 0]!=0)]
+    sidewalk_y = point[:, :, 2][(only_sidewalk[:, :, 2]!=0)]
 
-    '''plt.subplot(3,3,6)
-    plt.axis("off")
-    plt.title( "obstacle in "+str(fix_dist)+"M")
-    obs_obj[(depth> fix_dist)] = 0
-    plt.imshow(obs_obj)'''
+    px = point[:,:,0][obstacle[:,:,0]!=0]
+    py = point[:,:,2][obstacle[:,:,0]!=0]
 
-    plt.subplot(4,3,8)
-    plt.axis("off")
-    plt.title( "moving_obstacle in "+str(max_dist)+"M")
-    plt.imshow(RGB(moving_obstacle/(ANGLE_CLASS)))
+    plt.subplot(1,2,1)
+    plt.scatter(0,0, zorder=3, s =100, c='b', label = 'Robot',  marker = 'h')
+    plt.scatter(moving_object_position_x , moving_object_position[:,2], c='r' , label = 'Moving',  marker = 's', zorder=2, s =50)
+    plt.scatter(fixed_object_position_x , fixed_object_position[:,2], c='g', label = 'Fixed',  marker = 'D', zorder=2, s =50)
+    plt.scatter(sidewalk_x, sidewalk_y, c='skyblue', label = "Side Walk", zorder=0,alpha = 0.1,  s =30)
+    plt.scatter(px, py, c='orange', label = "Obstable", zorder=0, alpha = 0.1,  s =30)
+    plt.ylim(0,30)
+    plt.xlim(-30,30)
+    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable"], loc="upper right")
+    plt.ylabel("depth(m)")
+    plt.xlabel("dist(m)")
+    plt.title("2D map - dist")
 
-    plt.subplot(4,3,9)
-    plt.axis("off")
-    plt.title( "fixed_obstacle in "+ str(fix_dist)+"M")
-    plt.imshow(fixed_obstacle/(ANGLE_CLASS))
-
-    plt.subplot(4,3,11)
-    plt.axis("off")
-    plt.title( "selly_vision")
-    plt.imshow(RGB(selly_vision/255))
-
-def image_pred(model, img, point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG):
-    max_dist = max_dist
-    ori_img = img.copy()
-    seg_img, only_sidewalk = seg_predict(img,model)
-    yolo_img, _, __ = YOLO(img.copy())
-    depth = point2dist(point_cloud, 1/16)
-    only_sidewalk_limited_dist = only_sidewalk.copy()
-    only_sidewalk_limited_dist[(depth>max_dist)] = 0
-    obstacle = img.copy()
-    obstacle_depth = img.copy()
-    obstacle_depth[(depth>max_dist)] = 0 
-    obj_frame, moving_object, fixed_object = YOLO(obstacle_depth)
-    obstacle[~((only_sidewalk ==0) & (obstacle_depth!=0))] = 0
-    obs_obj = (obstacle).copy()
-    for i in moving_object:
-        cv2.rectangle(obs_obj, i[0], i[1], (100, 255 ,255), 3) 
-        cv2.putText(obs_obj,
-                        "Moving object",
-                        (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                        [0, 255, 0], 2)
-
-    for i in fixed_object:
-        cv2.rectangle(obs_obj, i[0], i[1], (255, 100 ,255), 3) 
-        cv2.putText(obs_obj,
-                        "Fixed_object",
-                        (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                        [0, 255, 0], 2)
+    plt.subplot(1,2,2)
 
 
-    obstacle_angle =  vision_angle(ANGLE, obstacle)
+    moving_object_x = []
+    moving_object_y = []
+    for i in moving_object_angle:
+        arr_x = []
+        arr_y = []
+        for j in range(int(i[0]), int(i[1])):
+            arr_x.append(j)
+            arr_y.append(i[2])
+        moving_object_x.extend(arr_x)
+        moving_object_y.extend(arr_y)
 
-    moving_obstacle = np.zeros_like(obstacle)
-    fixed_obstacle = np.zeros_like(obstacle)
+    fixed_object_x = []
+    fixed_object_y = []
+    for i in fixed_object_angle:
+        arr_x = []
+        arr_y = []
+        for j in range(int(i[0]), int(i[1])):
+            arr_x.append(j)
+            arr_y.append(i[2])
+        fixed_object_x.extend(arr_x)
+        fixed_object_y.extend(arr_y)
+    plt.scatter(0,0, zorder=3, s =100, c='b', label = 'Robot',  marker = 'h')
+    plt.scatter(moving_object_x , moving_object_y, c='r' , label = 'Moving',  marker = 's', zorder=2, s =50)
+    plt.scatter(fixed_object_x , fixed_object_y, c='g', label = 'Fixed',  marker = 'D', zorder=2, s =50)
+        
+    sidewalk_x = angle[:, :, 0][(only_sidewalk[:, :, 0]!=0)]
+    sidewalk_y = point[:, :, 2][(only_sidewalk[:, :, 2]!=0)]
 
-    for i in moving_object:
-        crop_obstacle_angle = obstacle_angle[i[0][1] : i[1][1], i[0][0] : i[1][0], :]
-        obj = np.zeros((i[1][1] - i[0][1],i[1][0] - i[0][0],3))
-        obj[crop_obstacle_angle!=0] = crop_obstacle_angle[crop_obstacle_angle!=0]
-        moving_obstacle[i[0][1] : i[1][1], i[0][0] : i[1][0], :] = obj
+    px = angle[:,:,0][obstacle[:,:,0]!=0]
+    py = point[:,:,2][obstacle[:,:,0]!=0]
 
-
-    fixed_obstacle[(moving_obstacle==0) & (obstacle!=0)] = obstacle[(moving_obstacle==0) & (obstacle!=0)]
-    fixed_obstacle[(depth> fix_dist)] = 0
-    obstacle_depth[(depth> fix_dist)] = 0
-    _, _, fixed_object = YOLO(obstacle_depth)
-
-
-    for i in moving_object:
-        cv2.rectangle(moving_obstacle, i[0], i[1], (100, 255 ,255), 3) 
-        cv2.putText(moving_obstacle,
-                                "Moving object",
-                                (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                                [0, 255, 0], 2)
-
-    for i in fixed_object:
-        cv2.rectangle(fixed_obstacle, i[0], i[1], (255, 100 ,255), 3) 
-        cv2.putText(fixed_obstacle,
-                                "Fixed_object",
-                                (i[0][0], i[0][1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                                [0, 255, 0], 2)
-
-
-    selly_vision, angle = selly_vision_img(model, img.copy(), point_cloud, max_dist, fix_dist, ANGLE, ANGLE_CLASS, ANGLE_IMG)
-
-    return seg_img, yolo_img, moving_obstacle/(ANGLE_CLASS), fixed_obstacle/(ANGLE_CLASS), obs_obj, selly_vision
+    plt.scatter(sidewalk_x, sidewalk_y, c='skyblue', label = "Side Walk", zorder=0,alpha = 0.1,  s =30)
+    plt.scatter(px, py, c='orange', label = "Obstable", zorder=0, alpha = 0.1,  s =30)
+    plt.ylim(0,30)
+    plt.xlim(-90,90)
+    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable"], loc="upper right")
+    plt.ylabel("depth(m)")
+    plt.xlabel("angle(degree)")
+    plt.title("2D map - angle")
 
 def RGB(frame): 
     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

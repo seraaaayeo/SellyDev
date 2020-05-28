@@ -49,7 +49,7 @@ while True:
 
         #client_socket.sendall(str(result[1]).encode())
 
-        cv2.imshow(" ", result[0]/255)
+        cv2.imshow("result", result[0]/255)
         cv2.waitKey(1)
         print(time.time() - start)
         start= time.time()

@@ -2,12 +2,7 @@ import math
 import cv2
 from util.angle import *
 
-
-def distance(value):
-    dist = math.sqrt(value[0]*value[0] + value[1]*value[1] + value[2]*value[2])
-    return (dist, dist, dist)
-
-def point2dist(arr, size): 
+def point2dist(arr): 
     width, height = int(480 * 1/4), int(270 * 1/4)
     arr  = cv2.resize(arr, (width ,height))
     arr = np.reshape(arr, (height*width,3))
