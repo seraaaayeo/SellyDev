@@ -1,7 +1,7 @@
 # Image analysis project for object avoidance 
 
-![image](https://user-images.githubusercontent.com/52908154/83319009-56d69c00-a275-11ea-878d-3c37ca0aca1a.png)
-![image](https://user-images.githubusercontent.com/52908154/83319015-6524b800-a275-11ea-992f-bca94cc6cd82.png)
+![image](https://user-images.githubusercontent.com/52908154/83771788-9c53f880-a6bd-11ea-973e-dad678bef87f.png)
+![image](https://user-images.githubusercontent.com/52908154/83771816-a4ac3380-a6bd-11ea-9630-d7e427bb8da9.png)
 
 #### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
