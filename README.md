@@ -3,9 +3,9 @@
 ![ezgif com-video-to-gif (7)](https://user-images.githubusercontent.com/52908154/83782689-e1caf280-a6ca-11ea-8e0b-983414fa4e31.gif)
 
 
+![ezgif com-video-to-gif (11)](https://user-images.githubusercontent.com/52908154/83790159-b4824280-a6d2-11ea-9675-6f9889b3a2b5.gif)
 
 
-![ezgif com-video-to-gif (10)](https://user-images.githubusercontent.com/52908154/83789689-0aa2b600-a6d2-11ea-8da6-2430c98cb9ce.gif)
 
 #### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
@@ -48,7 +48,7 @@
 
 ### 5. Determine the path
 
-![ezgif com-video-to-gif (8)](https://user-images.githubusercontent.com/52908154/83785398-358a0b80-a6cc-11ea-99b6-d516526cec15.gif)
+![ezgif com-video-to-gif (10)](https://user-images.githubusercontent.com/52908154/83789689-0aa2b600-a6d2-11ea-8da6-2430c98cb9ce.gif)
 
 * #### The number of pixels per angle was calculated for obstacles detected within 25 meters.
 * #### And averaged the number of obstacle pixels between -10 and 10 degrees from each angle.
