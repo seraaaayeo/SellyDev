@@ -42,3 +42,12 @@
 
 * #### Finally, the distance can be set to detect obstacles in that section. (There is no need to detect obstacles too far away.)
 
+### 5. Determine the path
+
+![image](https://user-images.githubusercontent.com/52908154/83778239-631f8680-a6c5-11ea-8ce4-73b9a11ac8e5.png)
+
+* #### The number of pixels per angle was calculated for obstacles detected within 25 meters.
+* #### And averaged the number of obstacle pixels between -10 and 10 degrees from each angle.
+* #### And the angle was selected by ordering the number of obstacle pixels low and close to 0 degrees.
+* #### Among them, the angle with the least obstacles was selected.
+
