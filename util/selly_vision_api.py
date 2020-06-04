@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from util.angle import *
 from util.depth import *
 from util.path import *
 from util.visualizer import *
@@ -20,11 +19,6 @@ if gpus:
     
 loaded = tf.saved_model.load("./trt_fp16")
 infer = loaded.signatures["serving_default"]
-
-ANGLE_CLASS = 18
-
-ANGLE = angle_dict(ANGLE_CLASS)
-ANGLE_IMG = angle_img(ANGLE, ANGLE_CLASS)
 
 def selly_vision(img, point, moving_dist=5, fixed_dist=2.5):
     img = np.frombuffer(img, dtype=np.float32)
