@@ -1,6 +1,6 @@
 # Image analysis project for object avoidance 
 
-![ezgif com-video-to-gif (7)](https://user-images.githubusercontent.com/52908154/83782689-e1caf280-a6ca-11ea-8e0b-983414fa4e31.gif)
+![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/52908154/83791845-3a9f8880-a6d5-11ea-9430-b7e8c5af6c97.gif)
 
 
 ![ezgif com-video-to-gif (11)](https://user-images.githubusercontent.com/52908154/83790159-b4824280-a6d2-11ea-9675-6f9889b3a2b5.gif)
