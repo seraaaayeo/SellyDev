@@ -1,7 +1,8 @@
 # Image analysis project for object avoidance 
 
-![image](https://user-images.githubusercontent.com/52908154/83771788-9c53f880-a6bd-11ea-973e-dad678bef87f.png)
-![image](https://user-images.githubusercontent.com/52908154/83771816-a4ac3380-a6bd-11ea-9630-d7e427bb8da9.png)
+![ezgif com-video-to-gif (7)](https://user-images.githubusercontent.com/52908154/83782689-e1caf280-a6ca-11ea-8e0b-983414fa4e31.gif)
+
+![ezgif com-video-to-gif (8)](https://user-images.githubusercontent.com/52908154/83785398-358a0b80-a6cc-11ea-99b6-d516526cec15.gif)
 
 #### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
@@ -44,10 +45,10 @@
 
 ### 5. Determine the path
 
-![image](https://user-images.githubusercontent.com/52908154/83778239-631f8680-a6c5-11ea-8ce4-73b9a11ac8e5.png)
+![ezgif com-video-to-gif (8)](https://user-images.githubusercontent.com/52908154/83785398-358a0b80-a6cc-11ea-99b6-d516526cec15.gif)
 
 * #### The number of pixels per angle was calculated for obstacles detected within 25 meters.
 * #### And averaged the number of obstacle pixels between -10 and 10 degrees from each angle.
-* #### And the angle was selected by ordering the number of obstacle pixels low and close to 0 degrees.
+* #### The angle was selected by ordering the number of obstacle pixels low and close to 0 degrees.
 * #### Among them, the angle with the least obstacles was selected.
 
