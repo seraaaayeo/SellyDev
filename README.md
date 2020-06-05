@@ -5,10 +5,10 @@
 
 * * *
 
-## Project List
+## Main Project List
 * [Autonomous-driving](https://github.com/JunHyeok96/Autonomous-Driving-Vision) : Image analysis to aviod obstacle
-* [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) : 2D SLAM based on LIDAR sensor
 * [road_segmentation](https://github.com/seraaaayeo/SellyDev/tree/road_segmentation) : Segmentation for pavement driving
+* [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) : 2D SLAM based on LIDAR sensor
 * [openvslam](https://github.com/seraaaayeo/SellyDev/tree/openvslam/VSLAM) : 3D SLAM based on Camera sensor
 
 ***
@@ -17,6 +17,8 @@
 * [이준혁](https://github.com/JunHyeok96)
 * [여다솔](https://github.com/seraaaayeo)
 * [김연우](https://github.com/Yeonwoo-Kim)
+
+***
 
 ## Test Project
 * [selly_vision](https://github.com/seraaaayeo/SellyDev/tree/selly_vision) : Proto Image analysis to aviod obstacle
