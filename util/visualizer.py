@@ -117,7 +117,7 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, height_max):
         if not i in obs_count.keys():
             obs_count[i] = 0
     for i in moving_object_angle:
-        if i[2] < 7:
+        if i[2] < 5:
             for j in range(int(i[0]), int(i[1])+1, 1):
                 if j in obs_count.keys():
                     obs_count[j] =9999
@@ -136,7 +136,7 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, height_max):
             ang_dict[i] = value 
     able_angle = sorted(ang_dict.items(), key =  lambda x : (x[1], np.abs(x[0])))
 
-    plt.figure(figsize=(20,6))
+    plt1 = plt.figure(figsize=(20,6))
     plt.subplot(2,4,1)
     plt.axis("off")
     plt.title("img")
@@ -179,8 +179,15 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, height_max):
     plt.title( "obstacle other")
     plt.imshow(obstacle_other)
 
-    plt.figure(figsize=(15,7))
-    plt.subplot(1,2,1)
+    plt2 = plt.figure(figsize=(15,7))
+    plt.subplot(1,3,1)
+    plt.axis("off")
+    plt.title("img")
+    plt.imshow(RGB(ori_img/255))
+
+    plt.subplot(1,3,2)
+    plt.scatter(0,0, zorder=3, s =100, c='b', label = 'Robot',  marker = 'h')
+
     if len(moving_object_position):
         moving_object_position_x = (moving_object_position[:, 0]+moving_object_position[:, 1])/2
         plt.scatter(moving_object_position_x , moving_object_position[:,2], c='r' , label = 'Moving',  marker = 's', zorder=2, s =50)
@@ -199,19 +206,17 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, height_max):
     px = point[:,:,0][obstacle[:,:,0]!=0]
     py = point[:,:,2][obstacle[:,:,0]!=0]
 
-    plt.subplot(1,2,1)
-    plt.scatter(0,0, zorder=3, s =100, c='b', label = 'Robot',  marker = 'h')
     plt.scatter(sidewalk_x, sidewalk_y, c='skyblue', label = "Side Walk", zorder=0,alpha = 0.1,  s =30)
     plt.scatter(px, py, c='orange', label = "Obstable", zorder=0, alpha = 0.1,  s =30)
     plt.arrow(0, 0, 5*np.sin(np.pi/(180/able_angle[0][0])), 5*np.cos(np.pi/(180/able_angle[0][0])),  linewidth = 3, head_width=1, head_length=0.5, color = "lime", label = "Path")
     plt.ylim(0,30)
     plt.xlim(-10,10)
-    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable", "Path"], loc="upper right")
+    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable"], loc="upper right")
     plt.ylabel("depth(m)")
     plt.xlabel("dist(m)")
     plt.title("2D map - dist")
 
-    plt.subplot(1,2,2)
+    plt.subplot(1,3,3)
 
 
     moving_object_x = []
@@ -250,11 +255,11 @@ def visualize(model, img, point_cloud, max_dist, fix_dist, height_max):
     plt.arrow(able_angle[0][0], 0, 0 , 5, linewidth = 4, head_width=2, head_length=0.5, color = "lime", label = "Path")
     plt.ylim(0,30)
     plt.xlim(-45,45)
-    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable", "Path"], loc="upper right")
+    plt.legend(labels = ["Robot", "Moving", "Fixed","Side Walk", "Obstable"], loc="upper right")
     plt.ylabel("depth(m)")
     plt.xlabel("angle(degree)")
     plt.title("2D map - angle")
-
+    return plt1, plt2
 
 
 def RGB(frame): 

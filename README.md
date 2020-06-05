@@ -1,16 +1,15 @@
-# Image analysis project for object avoidance 
+# 장애물 탐지를 위한 이미지 분석 (Obstacle detection)
+#### [개발 일지](https://jgrammer.tistory.com/category/Embedded/%EC%9E%90%EC%9C%A8%20%EC%A3%BC%ED%96%89%20%EB%B0%B0%EB%8B%AC%20%EB%A1%9C%EB%B4%87)
+
 
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/52908154/83791845-3a9f8880-a6d5-11ea-9430-b7e8c5af6c97.gif)
 
 
 ![ezgif com-video-to-gif (11)](https://user-images.githubusercontent.com/52908154/83790159-b4824280-a6d2-11ea-9675-6f9889b3a2b5.gif)
 
-
-
 #### We will use [object detection](https://github.com/JunHyeok96/object-dection), [image segmentation](https://github.com/JunHyeok96/Road-Segmentation), and depth images to make judgments to avoid objects.  
   
-  
-
+ 
 ### 1. Receive image and point cloud from camera.
 
 <img src= "https://user-images.githubusercontent.com/52908154/83318785-f9415000-a272-11ea-940f-f129740a45a6.png" width="30%"></img>
@@ -44,7 +43,7 @@
 
 ![image](https://user-images.githubusercontent.com/52908154/83319146-b4b7b380-a276-11ea-868c-3b00d490db66.png)
 
-* #### Finally, the distance can be set to detect obstacles in that section. (There is no need to detect obstacles too far away.)
+* #### This part can be modified fluidly. 
 
 ### 5. Determine the path
 
@@ -55,3 +54,4 @@
 * #### The angle was selected by ordering the number of obstacle pixels low and close to 0 degrees.
 * #### Among them, the angle with the least obstacles was selected.
 
+#### The test environment is RTX2060 super (fps 15)
