@@ -19,7 +19,7 @@
 * [김연우](https://github.com/Yeonwoo-Kim)
 
 ## Period
-Junuary - June 2020
+Junuary/2020 - June/2020
 
 ## Description
 교내 카페 '팬도로시'부터 AI센터까지 인도 보행으로 자율주행하는 배달로봇입니다.
