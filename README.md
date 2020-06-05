@@ -24,6 +24,8 @@ Junuary/2020 - June/2020
 ## Description
 교내 카페 '팬도로시'부터 AI센터까지 인도 보행으로 자율주행하는 배달로봇입니다.
 
+This is an Autonomous-driving robot software which drives on pavement only. First test path is pavement in front of main gate, Sejong University along with road from 'cafe Pandorosi' to 'AI center'.
+
 ## Stack
 * Embedded : Jetson nano, Arduino
 * Vision : Python3, Jupyter Notebook, Tensorflow 2.0
