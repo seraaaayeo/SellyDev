@@ -13,6 +13,11 @@
 
 ***
 
+## Contributor
+* [이준혁](https://github.com/JunHyeok96)
+* [여다솔](https://github.com/seraaaayeo)
+* [김연우](https://github.com/Yeonwoo-Kim)
+
 ## Test Project
 * [selly_vision](https://github.com/seraaaayeo/SellyDev/tree/selly_vision) : Proto Image analysis to aviod obstacle
 * [selly_motor](https://github.com/seraaaayeo/SellyDev/tree/selly_motor) : arduino ROS subscriber and jetson nano ROS publisher, which controll motor
