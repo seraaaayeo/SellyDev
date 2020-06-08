@@ -1,7 +1,7 @@
 import redis
 import time
 
-r = redis.StrictRedis(host='123.254.187.65' ,port=6379)
+r = redis.StrictRedis(host='' ,port=6379)
 
 first_time =  r.hget('result', 'time')
 
