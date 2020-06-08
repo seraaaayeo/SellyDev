@@ -19,9 +19,9 @@ This is an Autonomous-driving robot software which drives on pavement only. Firs
 ***
 
 ## Contributor
-* [이준혁](https://github.com/JunHyeok96):crown:
-* [여다솔](https://github.com/seraaaayeo)
-* [김연우](https://github.com/Yeonwoo-Kim)
+* [이준혁 (JunHyeok Lee)](https://github.com/JunHyeok96):crown:
+* [여다솔 (Dasol Yeo)](https://github.com/seraaaayeo)
+* [김연우 (Yeonwoo Kim)](https://github.com/Yeonwoo-Kim)
 
 ## Period
 Junuary/2020 - June/2020
