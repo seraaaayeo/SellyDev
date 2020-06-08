@@ -1,6 +1,6 @@
 <h3 align="center">Sejong delivery : Selly</h3>
 <p align="center">
-  Sejong University Selly Project Developers in 2020
+  :oncoming_automobile:Sejong University Selly Project Developers in 2020:oncoming_automobile:
 </p>
 
 * * *
@@ -11,7 +11,7 @@
 This is an Autonomous-driving robot software which drives on pavement only. First test path is pavement in front of main gate, Sejong University along with road from 'cafe Pandorosi' to 'AI center'.
 
 ## Main Project List
-* [Autonomous-driving](https://github.com/JunHyeok96/Autonomous-Driving-Vision) : Image analysis to aviod obstacle
+* [Autonomous-driving](https://github.com/JunHyeok96/Autonomous-Driving-Vision) : Image analysis to aviod obstacle:pushpin:
 * [road_segmentation](https://github.com/seraaaayeo/SellyDev/tree/road_segmentation) : Segmentation for pavement driving
 * [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) : 2D SLAM based on LIDAR sensor
 * [openvslam](https://github.com/seraaaayeo/SellyDev/tree/openvslam/VSLAM) : 3D SLAM based on Camera sensor
@@ -19,7 +19,7 @@ This is an Autonomous-driving robot software which drives on pavement only. Firs
 ***
 
 ## Contributor
-* [이준혁](https://github.com/JunHyeok96)
+* [이준혁](https://github.com/JunHyeok96):crown:
 * [여다솔](https://github.com/seraaaayeo)
 * [김연우](https://github.com/Yeonwoo-Kim)
 
