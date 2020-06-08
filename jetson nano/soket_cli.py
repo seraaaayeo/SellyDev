@@ -8,7 +8,7 @@ import pyzed.sl as sl
 import sys
 import base64
 
-HOST = '123.254.187.65'
+HOST = ''
 PORT = 9999
 
 def point2dist(arr): 
