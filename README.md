@@ -1,6 +1,6 @@
 # object-dection
 
-#### It was learned based on the [darknet](https://github.com/AlexeyAB/darknet)
+#### based on the [darknet](https://github.com/AlexeyAB/darknet)
 
 <img src = "https://user-images.githubusercontent.com/52908154/80477352-c3186400-8986-11ea-9f35-88533470fd07.png" width=45%><img>
 <img src = "https://user-images.githubusercontent.com/52908154/80478255-3f5f7700-8988-11ea-950e-3b51bbf0eebc.png" width=45%><img>
