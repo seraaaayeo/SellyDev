@@ -21,6 +21,7 @@ This is an auto-driving algorithm based on vision.
 * [object-detection](https://github.com/seraaaayeo/SellyDev/tree/selly/Obejct-Detection) : object detection to divide moving obstacle such as car and fixed object such as tree
 * [VSLAM](https://github.com/seraaaayeo/SellyDev/tree/selly/VSLAM) : Visual SLAM for mapping and localization to let robot know where it is
   * If you use Lidar sensor, you can use [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) for SLAM
+* [Motor-control](https://github.com/seraaaayeo/SellyDev/tree/) : Motor control with Motor driver
 
 ## Contributor
 * [이준혁 (JunHyeok Lee)](https://github.com/JunHyeok96):crown:
