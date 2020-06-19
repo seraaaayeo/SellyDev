@@ -1,6 +1,6 @@
 # visual SLAM with ZED camera
 
-![vslam](path)
+![ezgif com-resize (1)](https://user-images.githubusercontent.com/53554014/84214898-ba778980-aaff-11ea-82ff-f0564e138010.gif)
 
 ### openVSLAM : visual SLAM open package
 - docs : https://openvslam.readthedocs.io/en/master/index.html
