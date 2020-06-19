@@ -9,12 +9,19 @@
   * mini RC car
 
 
-* obstacle detection
+
 
 ![ezgif com-video-to-gif (7)](https://user-images.githubusercontent.com/50096655/85112345-751a3100-b250-11ea-85cf-5338c8d35897.gif)
 
+* obstacle detection
 
 
+
+![ezgif com-video-to-gif (6)](https://user-images.githubusercontent.com/50096655/85112211-3f754800-b250-11ea-9e9e-e526aa5cb23b.gif)
+![ezgif com-reverse](https://user-images.githubusercontent.com/50096655/85112608-d5a96e00-b250-11ea-8bba-c512bbe721ba.gif)
+
+![image](https://user-images.githubusercontent.com/50096655/85112086-12289a00-b250-11ea-9d14-3ac4a04cf54e.png)
+![image](https://user-images.githubusercontent.com/50096655/85112095-1654b780-b250-11ea-8d9b-ede1169ce78e.png)
 
 * motor drive test
   * RS550 Motor
@@ -23,10 +30,3 @@
   * 공압 타이어
   * 바퀴 연결 허브
   * 전동차 샤프트
-
-![ezgif com-video-to-gif (6)](https://user-images.githubusercontent.com/50096655/85112211-3f754800-b250-11ea-9e9e-e526aa5cb23b.gif)
-![ezgif com-reverse](https://user-images.githubusercontent.com/50096655/85112608-d5a96e00-b250-11ea-8bba-c512bbe721ba.gif)
-
-![image](https://user-images.githubusercontent.com/50096655/85112086-12289a00-b250-11ea-9d14-3ac4a04cf54e.png)
-![image](https://user-images.githubusercontent.com/50096655/85112095-1654b780-b250-11ea-8d9b-ede1169ce78e.png)
-
