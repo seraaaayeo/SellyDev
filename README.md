@@ -46,13 +46,14 @@ Junuary/2020 - June/2020
 |**Jetson_Nano** | <center>Main embedded, which uses ubuntu 18.04</center> |
 |**python** | <center>v3.6 or higher</center> |
 |**opencv** | <center>v4.1.1 or higher</center> |
-|**tensorflow** | <center>v1.13.0 or higher</center> |
+|**tensorflow** | <center>v2.0 or higher</center> |
 |**git** | <center>We follow github flow</center> |
 
 ***
 
 ## Ongoing Project List
 * [Motor-control](https://github.com/seraaaayeo/SellyDev/tree/selly/hardware%20controll) : Motor control with Motor driver
+* Navigation : Suggest route from current position to purpose point with GPS and SLAM
 
 ## Test Project List
 * [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) : 2D SLAM based on LIDAR sensor
@@ -63,7 +64,7 @@ Junuary/2020 - June/2020
 ***
 
 ## To-do Project List
-* navigation
+* ~navigation~
 * selly_service
 * ~selly_motorControl~
 
