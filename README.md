@@ -22,7 +22,7 @@ This is an auto-driving algorithm based on vision.
 * [VSLAM](https://github.com/seraaaayeo/SellyDev/tree/selly/VSLAM) : Visual SLAM for mapping and localization to let robot know where it is
   * If you use Lidar sensor, you can use [cartographer](https://github.com/seraaaayeo/SellyDev/tree/cartographer) for SLAM
 
-## Contributor
+## Contributors
 * [이준혁 (JunHyeok Lee)](https://github.com/JunHyeok96):crown:
 * [여다솔 (Dasol Yeo)](https://github.com/seraaaayeo)
 * [김연우 (Yeonwoo Kim)](https://github.com/Yeonwoo-Kim)
